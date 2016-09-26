@@ -1,1 +1,57 @@
 
+把程序作为一个可以运行的Unix脚本文件
+#!/usr/bin/python
+$chmod +x test.py
+$./test.py
+
+10/3 = 3
+10%3 = 1
+2**4 = 16
+divmod(10, 3) = (3, 1)
+
+处理list的方法
+L.append(var)	追加元素
+L.count(var)	计算var在L中出现的次数
+len(L)		返回L的长度
+L.extend(list)	将list追加在L后面
+L.index(var)	返回var在L中的位置
+L.insert(index, var)	在index处，插入var，其余元素向后推，如果index大于len(list)，就在最后添加，如果index小于0，就在最开始处添加
+L.pop()		返回最后一个元素，并且删除最后一个元素
+L.remove(var)	找到var并且删除，若找不到，抛出异常
+L.reverse()		将L倒序
+L.sort()		将L排序
+
+'''
+语法：
+str.rjust(width[, fillchar])
+参数:
+width -- 指定填充指定字符后中字符串的总长度.
+fillchar -- 填充的字符，默认为空格。
+'''
+#ljust左对齐
+str='xiaodeng'
+print str.ljust(20,'-')#使用短横线做填充
+#rjust右对齐
+print str.rjust(20,'-')
+#center居中对齐
+print str.center(20,'-')
+
+>>> a=["123","456","abc","Abc","AAA"]
+>>> [ k.center(9) for k in a ]
+[' 123 ', ' 456 ', ' abc ', ' Abc ', ' AAA ']
+#得到a中仅由字母组成的字符串，并变成大写
+>>> [ k.upper() for k in a if k.isalpha() ]
+['ABC', 'ABC', 'AAA']
+#得到a中仅由大写字母组成的字符串，并变成小写
+>>> [ k.lower() for k in a if k.isupper() ]
+['aaa']
+#得到a中仅由数字构成的字符串，并变为整数类型
+>>> [ int(k) for k in a if k.isdigit() ]
+[123, 456]
+把list中的所有元素加1
+[ k+1 for k in list]
+提取出list中所有整数变量
+[ k for k in list if type(k)==types.IntType]
+把list中的所有整数元素增加1
+[ k + 1 for k in list if type(k)==types.IntType ]
+

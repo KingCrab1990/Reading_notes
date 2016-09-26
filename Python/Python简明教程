@@ -1,0 +1,263 @@
+自然字符串 
+如果你想要指示某些不需要如转义符那样的特别处理的字符串，那么你需要指定一个自然字符串。自然字符串通过给字符串加上前缀r或R来指定。例如r"Newlines are indicated by \n"。
+
+Unicode字符串 
+Unicode是书写国际文本的标准方法。如果你想要用你的母语如北印度语或阿拉伯语写文本，那么你需要有一个支持Unicode的编辑器。类似地，Python允许你处理Unicode文本——你只需要在字符串前加上前缀u或U。例如，u"This is a Unicode string."。
+
+print \ 
+i 等同于 print i
+
+除运算：4/3得到1（整数的除法得到整数结果）。4.0/3或4/3.0得到1.3333333333333333
+乘运算：2 * 3得到6。'la' * 3得到'lalala'
+幂运算：3 ** 4得到81（即3 * 3 * 3 * 3）
+整除：4 // 3.0得到1.0
+
+while语句有一个可选的else从句
+
+break语句是用来 终止 循环语句的，即哪怕循环条件没有称为False或序列还没有被完全递归，也停止执行循环语句。
+一个重要的注释是，如果你从for或while循环中 终止 ，任何对应的循环else块将不执行。
+
+continue语句被用来告诉Python跳过当前循环块中的剩余语句，然后 继续 进行下一轮循环。
+
+
+if __name__ == '__main__':
+    print 'This program is being run by itself'   # 单独运行的时候
+else:
+    print 'I am being imported from another module' 	#作为模块被导入其他项目的时候
+
+dir(sys) # get list of attributes for sys module
+del a # delete/remove a name
+dir()
+	
+#!/usr/bin/python
+# Filename: using_tuple.py
+
+zoo = ('wolf', 'elephant', 'penguin')
+print 'Number of animals in the zoo is', len(zoo)
+
+new_zoo = ('monkey', 'dolphin', zoo)
+print 'Number of animals in the new zoo is', len(new_zoo)
+print 'All animals in new zoo are', new_zoo
+print 'Animals brought from old zoo are', new_zoo[2]
+print 'Last animal brought from old zoo is', new_zoo[2][2]
+# 元组和列表可以进行嵌套，从而形成二维列表和元组
+
+age = 22
+name = 'Swaroop'
+print '%s is %d years old' % (name, age)
+元组最通常的用法是用在打印语句中
+
+字典
+#!/usr/bin/python
+# Filename: using_dict.py
+# 'ab' is short for 'a'ddress'b'ook
+ab = {'Swaroop'   : 'swaroopch@byteofpython.info',
+             'Larry'     : 'larry@wall.org',
+             'Matsumoto' : 'matz@ruby-lang.org',
+             'Spammer'   : 'spammer@hotmail.com'}
+print "Swaroop's address is %s" % ab['Swaroop']
+# Adding a key/value pair
+ab['Guido'] = 'guido@python.org'
+# Deleting a key/value pair
+del ab['Spammer']
+print '\nThere are %d contacts in the address-book\n' % len(ab)
+for name, address in ab.items():
+    print 'Contact %s at %s' % (name, address)
+if 'Guido' in ab: # OR ab.has_key('Guido')
+    print "\nGuido's address is %s" % ab['Guido']
+
+list[1:3] #切片操作符，获取列表中1-3的项，不包含3
+list[:] 会创建一个list的副本
+
+delimiter = '_*_'
+mylist = ['Brazil', 'Russia', 'India', 'China']
+print delimiter.join(mylist)  # 生成一个Brazil_*_Russia_*_India_*_China字符串
+
+
+给Windows用户的注释
+你可以把source列表和target目录设置成任何文件和目录名，但是在Windows中你得小心一些。问题是Windows把反斜杠（\）作为目录分隔符，而Python用反斜杠表示转义符！
+所以，你得使用转义符来表示反斜杠本身或者使用自然字符串。例如，使用'C:\\Documents'或r'C:\Documents'而不是'C:\Documents'——你在使用一个不知名的转义符\D
+
+行末使用"\"代表未结束，可以将物理行合并为一个逻辑行
+
+根据操作数据的函数或语句块来设计程序的。这被称为面向过程的编程。
+还有一种把数据和功能结合起来，用称为对象的东西包裹起来组织程序的方法。
+这种方法称为面向对象的编程理念。
+
+继承
+#!/usr/bin/python
+# Filename: inherit.py
+
+class SchoolMember:
+    '''Represents any school member.'''
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        print '(Initialized SchoolMember: %s)' % self.name
+
+    def tell(self):
+        '''Tell my details.'''
+        print 'Name:"%s" Age:"%s"' % (self.name, self.age),
+
+class Teacher(SchoolMember):
+    '''Represents a teacher.'''
+    def __init__(self, name, age, salary):
+        SchoolMember.__init__(self, name, age)
+        self.salary = salary
+        print '(Initialized Teacher: %s)' % self.name
+
+    def tell(self):
+        SchoolMember.tell(self)
+        print 'Salary: "%d"' % self.salary
+
+class Student(SchoolMember):
+    '''Represents a student.'''
+    def __init__(self, name, age, marks):
+        SchoolMember.__init__(self, name, age)
+        self.marks = marks
+        print '(Initialized Student: %s)' % self.name
+
+    def tell(self):
+        SchoolMember.tell(self)
+        print 'Marks: "%d"' % self.marks
+
+t = Teacher('Mrs. Shrividya', 40, 30000)
+s = Student('Swaroop', 22, 75)
+
+print # prints a blank line
+
+members = [t, s]
+for member in members:
+    member.tell() # works for both Teachers and Students
+
+
+一个术语的注释——如果在继承元组中列了一个以上的类，那么它就被称作 多重继承 。
+
+文件使用以及break
+#!/usr/bin/python
+# Filename: using_file.py
+
+poem = '''\
+Programming is fun
+When the work is done
+if you wanna make your work also fun:
+        use Python!
+'''
+
+f = file('poem.txt', 'w') # open for 'w'riting
+f.write(poem) # write text to file
+f.close() # close the file
+
+f = file('poem.txt')
+# if no mode is specified, 'r'ead mode is assumed by default
+while True:
+    line = f.readline()
+    if len(line) == 0: # Zero length indicates EOF
+        break
+    print line,
+    # Notice comma to avoid automatic newline added by Python
+f.close() # close the file 
+
+还有另一个模块称为cPickle，它的功能和pickle模块完全相同，只不过它是用C语言编写的，因此要快得多（比pickle快1000倍）。你可以使用它们中的任一个，而我们在这里将使用cPickle模块。记住，我们把这两个模块都简称为pickle模块。
+
+sys.stdin、sys.stdout和sys.stderr它们分别对应你的程序的标准输入、标准输出和标准错误流。
+
+os.name字符串指示你正在使用的平台。比如对于Windows，它是'nt'，而对于Linux/Unix用户，它是'posix'。
+os.getcwd()函数得到当前工作目录，即当前Python脚本工作的目录路径。
+os.getenv()和os.putenv()函数分别用来读取和设置环境变量。
+os.listdir()返回指定目录下的所有文件和目录名。
+os.remove()函数用来删除一个文件。
+os.system()函数用来运行shell命令。
+os.linesep字符串给出当前平台使用的行终止符。例如，Windows使用'\r\n'，Linux使用'\n'而Mac使用'\r'。
+os.path.split()函数返回一个路径的目录名和文件名。
+>>> os.path.split('/home/swaroop/byte/code/poem.txt')
+('/home/swaroop/byte/code', 'poem.txt') 
+os.path.isfile()和os.path.isdir()函数分别检验给出的路径是一个文件还是目录。类似地，os.path.existe()函数用来检验给出的路径是否真地存在。
+
+__init__(self,...) 这个方法在新建对象恰好要被返回使用之前被调用。 
+__del__(self) 恰好在对象要被删除之前调用。 
+__str__(self) 在我们对对象使用print语句或是使用str()的时候调用。 
+__lt__(self,other) 当使用 小于 运算符（<）的时候调用。类似地，对于所有的运算符（+，>等等）都有特殊的方法。 
+__getitem__(self,key) 使用x[key]索引操作符的时候调用。 
+__len__(self) 对序列对象使用内建的len()函数的时候调用。 
+
+#!/usr/bin/python
+# Filename: list_comprehension.py
+listone = [2, 3, 4]
+listtwo = [2*i for i in listone if i > 2]
+print listtwo 
+
+>>> def powersum(power, *args):
+...     '''Return the sum of each argument raised to specified power.'''
+...     total = 0
+...     for i in args:
+...          total += pow(i, power)
+...     return total
+...
+>>> powersum(2, 3, 4)  #求3的平方与4的平方的和
+25
+>>> powersum(2, 10)  # 求10的平方
+100 
+由于在args变量前有*前缀，所有多余的函数参数都会作为一个元组存储在args中。如果使用的是**前缀，多余的参数则会被认为是一个字典的键/值对。
+
+#!/usr/bin/python
+# Filename: lambda.py
+def make_repeater(n):
+    return lambda s: s*n
+twice = make_repeater(2)
+print twice('word')  # 结果是wordword
+print twice(5)   # 结果是10
+
+exec语句用来执行储存在字符串或文件中的Python语句
+>>> exec 'print "Hello World"'
+Hello World 
+eval语句用来计算存储在字符串中的有效Python表达式
+>>> eval('2*3')
+6 
+
+assert语句用来声明某个条件是真的
+
+python  GUI库
+PyQt 这是Qt工具包的Python绑定。Qt工具包是构建KDE的基石。Qt，特别是配合Qt Designer和出色的Qt文档之后，它极其易用并且功能非常强大。你可以在Linux下免费使用它，但是如果你在Windows下使用它需要付费。使用PyQt，你可以在Linux/Unix上开发免费的（GPL约定的）软件，而开发具产权的软件则需要付费。一个很好的PyQt资源是《使用Python语言的GUI编程：Qt版》请查阅官方主页以获取更多详情。
+
+PyGTK 这是GTK+工具包的Python绑定。GTK+工具包是构建GNOME的基石。GTK+在使用上有很多怪癖的地方，不过一旦你习惯了，你可以非常快速地开发GUI应用程序。Glade图形界面设计器是必不可少的，而文档还有待改善。GTK+在Linux上工作得很好，而它的Windows接口还不完整。你可以使用GTK+开发免费和具有产权的软件。请查阅官方主页以获取更多详情。
+
+wxPython 这是wxWidgets工具包的Python绑定。wxPython有与它相关的学习方法。它的可移植性极佳，可以在Linux、Windows、Mac甚至嵌入式平台上运行。有很多wxPython的IDE，其中包括GUI设计器以及如SPE（Santi's Python Editor）和wxGlade那样的GUI开发器。你可以使用wxPython开发免费和具有产权的软件。请查阅官方主页以获取更多详情。
+
+TkInter 这是现存最老的GUI工具包之一。如果你使用过IDLE，它就是一个TkInter程序。在PythonWare.org上的TkInter文档是十分透彻的。TkInter具备可移植性，可以在Linux/Unix和Windows下工作。重要的是，TkInter是标准Python发行版的一部分。
+http://www.python.org/cgi-bin/moinmoin/GuiProgramming
+
+Python.org——Python编程语言的官方主页。你可以在上面找到Python语言和解释器的最新版本。另外还有各种邮件列表活跃地讨论Python的各方面内容。
+comp.lang.python是讨论Python语言的世界性新闻组。你可以把你的疑惑和询问贴在这个新闻组上。可以使用Google群在线访问这个新闻组，或加入作为新闻组镜像的邮件列表。
+《Python实用大全》是一个极有价值的秘诀和技巧集合，它帮助你解决某些使用Python的问题。这是每个Python用户必读的一本书。
+《迷人的Python》是David Mertz编著的一系列优秀的Python相关文章。
+《深入理解Python》是给有经验的Python程序员的一本很优秀的书。如果你已经完整地阅读了本书，那么我强烈建议你接下来阅读《深入理解Python》。它覆盖了包括XML处理、单元测试和功能性编程在内的广泛的主题。
+《dive into Python-5.4(中文版)》
+http://mail.python.org/mailman/listinfo
+
+
+
+
+https://www.zhihu.com/question/21395276/answer/123040719
+http://code.google.com/edu/languages/google-python-class/
+
+
+Code Style：
+
+https://www.python.org/dev/peps/pep-0008/
+http://docs.python-guide.org/en/latest/writing/style/
+advanced:http://www.turnkeylinux.org/blog/beautiful-python-code
+
+Staticmethods v.s. Classmethods
+http://stackoverflow.com/questions/12179271/python-classmethod-and-staticmethod-for-beginner
+
+
+1. 获取本地ip
+import socket
+localIP = socket.gethostbyname(socket.gethostname())#得到本地ip
+print (localIP)
+2. 获取本地和外网ip
+ipList = socket.gethostbyname_ex(socket.gethostname())
+3. 获取ipV4和V6ip地址，只在windows上好用
+socket.getaddrinfo(socket.gethostname(),None,0,socket.SOCK_STREAM)
+

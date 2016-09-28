@@ -55,3 +55,205 @@ print str.center(20,'-')
 把list中的所有整数元素增加1
 [ k + 1 for k in list if type(k)==types.IntType ]
 
+# 合并多行
+"abc" \
+'def'
+
+\\ \ 反斜杠
+\' ' 单引号
+\" " 双引号
+\a 0x07 响铃
+\b 0x08 退格
+\f 0x0c Formfeed (FF)
+\n 0x0a 换行
+\N{name} Unicode字符
+\r 0x0d 回车
+\t 0x09 水平制表符
+\v 0x0b 垂直制表符
+\u{xxxx} Unicode编码
+\ooo 0xooo ooo表示的八进制字符
+\xhh 0xhh hh表示的十六进制字符
+
+"this is test".capitalize() #首字母大写
+"THIS IS TEST".lower() #全部变成小写
+"this is test".upper() #全部变成大写
+"This Is Test".swapcase() #大小写互换
+
+str="Hello"
+>>> str[1:-1]
+'ell'
+>>> str[-1:2]
+''
+
+s.isalnum() #所有字符都是数字0-9或字母A-Z,a-z
+s.isalpha() #所有字符都是字母a-z或A-Z
+s.isdigit() #所有字符都是数字0-9
+s.islower() #所有字符都是小写字母a-z
+s.isupper() #所有字符都是大写字母A-Z
+s.istitle() #所有单词都是首字母大写
+s.isspace() #所有字符都是空白字符\n,\t,\r,' '
+
+s.find(substring,[start [,end]]) #如果找到，返回索引值，找不到返回-1
+s.rfind(substring,[start [,end]]) #反向查找
+s.index(substring,[start [,end]]) #和find()类似，但是如果找不到substring，就产生一个ValueError的异常
+s.rindex(substring,[start [,end]]) #和index()类似，但是是反向查找
+s.count(substring,[start [,end]]) #返回找到substring的次数
+
+>>> print "%s's height is %dcm"%("Charles",180)
+Charles's height is 180cm
+一个%接一个内容
+d和i	表示有符号十进制整数
+o		表示无符号八进制数
+u		表示无符号整数
+x		表示无符号十六进制(小写)
+X		表示无符号十六进制(大写)
+e		表示浮点数(小写)
+E		表示浮点数(大写)
+f		表示浮点数
+g		表示浮点数，如果是小于0.0001或者不够精度，就用科学表示法
+c		表示把ASCII整数表示单个字符
+r		表示一个字符串，这个字符串使用repr()的返回值  >>>"%r"%({"one":1,"two":2})		"{'two':2,'one':1}"		和print expr(obj)打印出来的效果一样
+s		表示一个字符串，这个字符串使用str()函数的返回值
+
+>>> print "%(name)s's height is %(height)d cm" \
+... ",%(name)s's weight is %(weight)d kg" % \
+... {"name":"Charles","height":170,"weight":70}
+Charles's height is 170 cm,Charles's weight is 70 kg
+minimum field width 表示最小长度
+>>> print "%10d,%10d"%(1,2)
+1, 2
+precision用来表示精度，只对浮点数有作用，带有四舍五入的功能
+>>> print "%10.2f,%10.2f"%(10.123456,20.126456)
+10.12, 20.13
+
+0表示补全，使之满足宽度
+>>> print "%010d,%010d"%(1,2)
+0000000001,0000000002
+
+-表示左对齐
+>>> print "%-010d,%-010d"%(1,2)
+1      ,2          
+
+空格表示0和正数前面加个空格，负数前面加-
+>>> print "% 10d,% 10d,% 10d"%(-1,2,-0)
+          -1,           2,            0
+
++表示显示符号		  
+>>> print "%+10d,%+10d,%+10d"%(-1,2,0)
+       -1,        +2,         +0		  
+		  
+s.ljust(width) #左对齐并补位
+s.rjust(width) #右对齐并补位
+s.center(width) #居中并补位
+s.lstrip() #去掉左边空白字符
+s.rstrip() #去掉游标空白字符
+s.lstrip() #去掉两边空白字符  
+
+s.join(words)，words是一个只含有字符串的tuple或者list
+>>> "\n".join(["Hello","World","Python","Said"])
+'Hello\nWorld\nPython\nSaid'
+
+s.split(words)，words是一个字符串，表示分隔符
+>>> "This is a book".split(" ")
+['This', 'is', 'a', 'book']
+
+tuple是常量list，tuple不能pop，remove，insert等方法
+tuple用()表示，如a=(0, 1, 2, 3, 4,)
+tuple可以用下表返回元素或者子tuple
+tuple可以用于多个变量的赋值
+a, b=(1,2)
+一个元素的元组：(1, )
+
+sequence 包括string, list, tuple。他们都有以下一些通用的操作
+in判断某个object是不是在一个sequence中
+
+字典
+>>> pricelist={"clock":12,"table":100,"xiao":100 }
+>>> pricelist["clock"]
+12
+>>> del pricelist["clock"]
+>>> pricelist
+{'table': 100, 'xiao': 100}
+
+dict(L) 可以构造一个dictionary
+其中L是一个list，L中每一个元素是一个tuple
+tuple中有两个元素，前面的是key，后面的事value
+>>> pricelist=dict([(x,10*x) for x in [1,2,3]])
+>>> pricelist
+{1: 10, 2: 20, 3: 30}
+对不存在的key做赋值操作，则增加一个元素，读取不存在的key，会抛出异常
+
+D.get(key)和D.get(key, defaultValue)
+若无key，D.get(key)返回None，D.get(key, defaultValue)返回defaultValue
+
+D.haskey(key)	用户判断D中是否含有key，相当于key in D.keys()
+>>> a
+{'four': 4, 'three': 3, 'two': 2, 'one': 1}
+>>> print a.has_key("one")
+1
+>>> print a.has_key("abc")
+0
+
+D.items()	得到一个list，其中的每个元素是一个含有两个元素的tuple，tuple中前面是key，后面是value
+{'four': 4, 'three': 3, 'two': 2, 'one': 1}
+>>> a.items()
+[('four', 4), ('three', 3), ('two', 2), ('one', 1)]
+
+D.copy()	相当于dict(D.items())	但是若欲得到副本，用copy更快
+D.keys()	得到list，含有D中的所有key
+a.copy()还可以写成dict([(k,a[k]) for k in a.keys()])
+D.values()	得到list，含有D中的所有value
+
+D.update(E)	从E中得到新的数据，同等于
+for k in E.keys():
+	D[k]=E[k]
+D.popitem()		得到一个pair，并且从原字典删除，若D是空，抛出异常
+
+for(i=0;i<len;i++){
+	if(a[i]==100) break;
+}
+if(i==len){/*100 not found*/
+	/*do something*/
+}
+上面是C的实现，下面是python的实现，功能类似
+>>> a
+[1, 2, 3, 4]
+>>> for x in a:
+... if x==100: break
+... else:
+... print "100 not found"
+...
+100 not found
+
+>>> a=[1,2,3,4]
+>>> for x in a:
+... 	x=x+1
+>>> x
+5
+>>> a
+[1, 2, 3, 4]
+>>> D={"one":1,"two":2,"three":3}
+>>> for x in D:
+... 	D[x] += 1;
+>>> D
+{'three': 4, 'two': 3, 'one': 2}
+>>> a
+[1, 2, 3, 4]
+>>> for x in range(len(a)):
+... 	a[x]=a[x]+2
+>>> a
+[3, 4, 5, 6]
+
+>>> def myjoin(str,sep=","):
+... 	return sep.join(str)
+>>> myjoin(["a","b","c"])
+'a,b,c'
+>>> myjoin(["a","b","c"],";")
+'a;b;c'
+
+>>> def printf(format,*arg):
+... 	print format%arg
+>> def printf(format,*arg):
+... 	print type(arg)
+... 	print format%arg
+>>> printf("a",1)

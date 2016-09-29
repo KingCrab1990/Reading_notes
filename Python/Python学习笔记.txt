@@ -257,3 +257,229 @@ if(i==len){/*100 not found*/
 ... 	print type(arg)
 ... 	print format%arg
 >>> printf("a",1)
+<type 'tuple'>
+
+>>> def printf(format,**keyword):
+... 	for k in keyword.keys():
+... 		print "keyword[%s] is %s"%(k,keyword[k])
+>>> printf("ok",One=1,Two=2,Three=3)
+keyword[Three] is 3
+keyword[Two] is 2
+keyword[One] is 1
+两种机制和在一起使用
+>>> def testfun(fixed,optional=1,*arg,**keywords):
+... 	print "fixed parameters is ",fixed
+... 	print "optional parameter is ",optional
+... 	print "Arbitrary parameter is ", arg
+... 	print "keywords parameter is ",keywords
+>>> testfun(1,2,"a","b","c",one=1,two=2,three=3)
+fixed parameters is 1
+optional parameter is 2
+Arbitrary parameter is ('a', 'b', 'c')
+keywords parameter is {'three': 3, 'two': 2, 'one': 1}
+函数接受参数的顺序，先接受固定参数，然后是可选，然后是任意，最后是带名字的任意参数
+
+可以简单的认为lambda函数式一种匿名函数
+>>> f = lambda a,b: a+b
+>>> f(1,2)
+3
+>>> f("abc","def")
+'abcdef'
+一个函数可以返回一个lambda函数
+>>> def incfun(a):
+... return lambda x: x+a
+>>> incfun(2)(12)
+14
+>>> incfun(2)(13)
+15
+>>> incfun(4)(13)
+17
+
+python允许函数嵌套
+>>> def outfun(a,b):
+... def innerfun(x,y):
+... return x+y
+... return innerfun(a,b)
+>>> outfun(1,2)
+3
+
+用del语句可以从一个name spcae 删除一个name
+>>> del a
+
+得到一个object的name space的方法是var(object)
+得到一个object的attribute的方法是dir(object)
+
+isinstance(obj,cls)	查看obj是不是cls的instance
+issubclass(subcls,supcls) 查看subcls是不是supcls的子类
+
+python有profile module用于计算python程序中每段代码的性能，找到瓶颈，确认瓶颈，然后优化
+
+和操作系统相关的调用
+sys.argv		包含所有的命令行参数
+sys.stdout		标准输入输出
+sys.exit(exit_code)		退出程序
+sys.modules		是一个dictionary，表示系统中所有可用的module，例如：sys.modules["os"]
+sys.platform	得到操作系统环境
+os.environ		一个dictionary,包含环境变量的映射关系，os.environ["HOME"]可以得到HOME的值
+os.chdir(dir)	改变当前目录
+os.getcwd()		得到当前目录
+
+>>> os.mkdir('/tmp/xx') #创建目录
+>>> os.system("echo 'hello' > /tmp/xx/a.txt")
+0
+>>> os.listdir('/tmp/xx')
+>>> os.listdir('/tmp/xx')
+['a.txt']
+>>> os.rename('/tmp/xx/a.txt','/tmp/xx/b.txt')
+>>> os.listdir('/tmp/xx')
+['b.txt']
+>>> os.remove('/tmp/xx/b.txt')
+>>> os.listdir('/tmp/xx')
+[]
+>>> os.rmdir('/tmp/xx') #删除目录
+>>> os.listdir('/tmp/xx')
+
+正则
+\d [0-9]
+\D [^0-9]
+\s [ \t\n\r\f\v]
+\S [^ \t\n\r\f\v]
+\w [a-zA-Z0-9_]
+\W [^a-zA-Z0-9_]
+\t 表示和tab匹配
+单独的一个"."如果没有出席那在[]中，表示除了换行\n以外的匹配任何字符，等同于[^\n]
+>>> re.compile("a*").match('aaaa').end()
+4
+>>> re.compile("a*?").match('aaaa').end()
+0
+最小匹配：在*+?{m,n}后面加一个?，变成*?,+?,??,[m,n]?表示最小匹配
+re.compile("a").match("bbab")  match是把re_obj和str的开头进行匹配
+re.compile("a").search("bbab")  search是在str中搜索第一个和re_obj匹配的部分，不必从开头就匹配
+re.compile("a").findall("bbab")  在str中搜索所有和re_obj匹配的部分，返回tuple
+
+>>> x="""
+... name: Charles
+... Address: BUPT
+... telephone: 62281234
+... email: annCharles@tom.com
+...
+... name: Ann
+... Address: BUPT
+... telephone: 62284321
+... email: CharlesWang@peoplemail.com.cn
+... """
+>>> p=re.compile(
+... r"^name:(.*)\n^Address:(.*)\n^telephone:(.*)\n^email:(.*)\n",re.M)
+>>> for m in p.finditer(x):
+... print "here is your friends list"
+... print "%s,%s,%s,%s"%m.groups()
+...
+here is your friends list
+Charles, BUPT, 62281234, annCharles@tom.com
+here is your friends list
+Ann, BUPT, 62284321, CharlesWang@peoplemail.com.cn
+
+简单的客户端的例子
+#/usr/bin/env python
+# simpleClient.py
+import sys,os
+import socket
+def main():
+s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.connect((socket.gethostname(),8000))
+s.send("GET index.html\n")
+s.shutdown(1);
+sys.stdout.write(s.recv(1024))
+s.close()
+if __name__ == "__main__":
+main()
+简单的服务端的例子
+# simpleserver.py
+import socket,sys,os,popen2
+def main():
+s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.bind((socket.gethostname(),8080))
+s.listen(1)
+clientsocket,clientaddress = s.accept();
+clientsocket.send("welcome %s\n" % str(clientaddress))
+data.send("%s"%str(arg))
+clinetsocket.close()
+s.close()
+if __name__ == "__main__" :
+main()
+
+创建socket的函数：socket(address_family,type,protocol_type)
+1.address_family用来指定要建立哪一类socket，
+'AF_APPLETALK', 'AF_AX25', 'AF_BRIDGE',
+'AF_INET', 'AF_INET6', 'AF_IPX',
+'AF_NETROM','AF_PACKET', 'AF_ROSE',
+'AF_UNIX', 'AF_UNSPEC', 'AF_X25']
+最常用的事AF_INET
+2.type用来指定通信类型
+'SOCK_DGRAM', 'SOCK_RAW', 'SOCK_RDM',
+'SOCK_SEQPACKET', 'SOCK_STREAM'
+3.protocol_type用于制定协议类型
+建立TCP socket的常用方法：sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+建立UDP socket的常用方法：sock = sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+建立Unix 域用于进程间通信的socket方法：sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+
+>>> import socket
+>>> socket.gethostname()
+'charles.home.com.cn'
+>>> socket.gethostbyname(socket.gethostname())
+'192.168.200.18'
+>>> socket.gethostbyname_ex("www.sohu.com")
+('pagegrp1.sohu.com', ['www.sohu.com'], ['61.135.150.67',
+'61.135.150.69', '61.135.150.74', '61.135.150.75', '61.135.131.73',
+'61.135.131.180', '61.135.131.183', '61.135.132.172', '61.135.132.173',
+'61.135.132.174', '61.135.132.176', '61.135.133.109', '61.135.145.47',
+'61.135.150.65', '61.135.150.66'])
+>>> socket.gethostbyname("www.sohu.com")
+'61.135.131.180'
+
+gethostname可以得到当前的主机名称
+gethostbynam可以根据主机名称得到主机的IP地址
+gethostbyname可以根据主机名称得到主机的所有名称信息，返回tuple
+gethostbyaddr可以根据IP地址得到主机的所有名称信息
+getservbyname可以根据服务的名称，得到对应的端口号，需要指定是TCP协议还是UDP协议
+
+TCP是面向连接的，UPD是面向非连接的，TCP就像打电话，需要接听建立通信，UDP就像寄信，不需要建立连接，直接发送
+
+#/usr/bin/env python
+# echo.server.fork.py
+# simpleserver.py
+import socket,sys,os
+clients=[]
+def handledata(s):
+	data = s.recv(1024)
+	while data:
+		try:
+			s.send(data)
+			data = s.recv(1024)
+		except:
+			sys.exit(0)
+def main():
+	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+	s.bind((socket.gethostname(),8080))
+	s.listen(10)
+	while 1:
+		clientsocket,clientaddress = s.accept();
+		pid = os.fork()
+		if pid==0: # child process
+			# close the server socket .
+			# because the child process should not
+			# care about the accept the connect request
+			s.close()
+			handledata(clientsocket)
+		else: # this is parent process
+			# close the client socket
+			# because the parent should not
+			# care about sending/receiving data
+			clientsocket.close()
+if __name__ == "__main__" :
+	main()
+
+
+
+	
+

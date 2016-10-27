@@ -114,3 +114,95 @@ cProfile 模块是Python2.5 新增的， 它用来替换掉已经有历史的hot
 'edcba'
 >>> foostr[::-2]
 'eca'
+
+a is b
+这个表达式等价于下面的表达式
+id(a) == id(b)
+
+布尔逻辑运算符 and， or 和 not 都是Python 关键字，这些运算符的优先级按从高到低
+的顺序列于表4.3. not 运算符拥有最高优先级，只比所有比较运算符低一级。 and 和 or 运
+算符则相应的再低一级。
+
+repr(obj) 或 `obj` 返回一个对象的字符串表示
+str(obj) 返回对象适合可读性好的字符串表示
+type(obj) 得到一个对象的类型，并返回相应的type 对象
+cmp(obj1, obj2)用于比较两个对象obj1 和obj2， 如果obj1 小于obj2, 则返回一个负整
+数，如果obj1 大于obj2 则返回一个正整数， 如果obj1 等于obj2， 则返回0。
+
+str()函数得到的字符串可读性好， 而repr()函数得到的字符
+串通常可以用来重新获得该对象, 通常情况下 obj == eval(repr(obj)) 这个等式是成立的。
+
+解释器不得不首先查找types 这个模块
+的名字，然后在该模块的字典中查找IntType。通过使用from-import，你可以减少一次查询：
+from types import IntType
+if isinstance(num, int) # 如果num的类型是int
+
+数据类型 存储模型 更新模型 访问模型
+数字 Scalar 不可更改 直接访问
+字符串 Scalar 不可更改 顺序访问
+列表 Container 可更改 顺序访问
+元组 Container 不可更改 顺序访问
+字典 Container 可更改 映射访问
+
+Python 没有 char 或 byte 类型来保存单一字符或8 比特整数。你可以使用长度为1 的字
+符串表示字符或8 比特整数。
+
+对那些宁愿放弃更大的取值范围而需要更高精确度的
+用户来说， Python 还有一种十进制浮点数类型 Decimal， 不过你必须导入decimal 模块才可
+以使用它。浮点数总是不精确的。Decimals 则拥有任意的精度。在处理金钱这类确定的值时，
+Decimal 类型就很有用。
+
+from __future__ import division 使整数可以直接进行除法，例：1/2=0.5
+
+coerce()，数据类型转换函数
+>>>coerce(1.3, 134L)
+(1.3, 134.0)
+divmod()内建函数把除法和取余运算结合起来, 返回一个包含商和余数的元组
+>>> divmod(10,3)
+(3, 1)
+内建函数round()用于对浮点数进行四舍五入运算。它有一个可选的小数位数参数。如果
+不提供小数位参数， 它返回与第一个参数最接近的整数（但仍然是浮点类型）。第二个参数告
+诉round 函数将结果精确到小数点后指定位数。
+
+函数 int()直接截去小数部分。（返回值为整数）
+函数 floor()得到最接近原数但小于原数的整数。（返回值为浮点数）
+函数 round()得到最接近原数的整数。（返回值为浮点数）
+abs(num) 返回 num 的绝对值
+coerce(num1, num2) 将num1和num2转换为同一类型，然后以一个 元组的形式返回。
+divmod(num1, num2) 除法－取余运算的结合。返回一个元组(num1/num2,num1 % num2)。
+对浮点数和复数的商进行下舍入（复数仅取实数部分的商）
+
+pow(num1, num2, mod=1) 取 num1 的 num2次方，如果提供 mod参数，则计算结果再对mod进行取余运算
+round(flt, ndig=0) 接受一个浮点数 flt 并对其四舍五入，保存 ndig位小数。若不提供ndig 参数，则默认小数点后0位。
+
+Python 还提供了两个内建函数来返回字符串表示的8 进制和16 进制整数。它们分别是 oct()
+和 hex()。它们都接受一个整数（任意进制的）对象，并返回一个对应值的字符串对象。
+
+函数chr()接受一个单字节整数值，返回一个字符串，
+unichr()，unichr()跟它一样，只不过返回的是Unicode 字符
+unicode()和unichar()可以看成Unicode 版本的str()和chr()
+其值为对应的字符。函数ord()则相反，它接受一个字符，返回其对应的整数值。
+>>> chr(97)
+'a'
+>>> ord('a')
+97
+
+
+decimal 十进制浮点运算类 Decimal
+array 高效数值数组（字符，整数，浮点数等等）
+math/cmath 标准C库数学运算函数。常规数学运算在match模块，复数运算在cmath模块
+operator 数字运算符的函数实现。比如 tor.sub(m,n)等价于 m - n
+random 多种伪随机数生成器
+
+两个整数参数，返回二者之间的随机整数
+randrange() 它接受和 range() 函数一样的参数， 随机返回range([start,]stop[,step])结果的一项
+randrange(10)  或  randrange(0，10)
+uniform() 几乎和 randint()一样，不过它返回的是二者之间的一个浮点数(不包括范围上限)。
+uniform(0, 10)
+random() 类似 uniform() 只不过下限恒等于0.0，上限恒等于1.0
+random()
+choice() 随机返回给定序列（关于序列，见第六章）的一个元素
+choice(list)
+
+
+

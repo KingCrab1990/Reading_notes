@@ -1,0 +1,176 @@
+每次都把位于最后的一个字符砍掉
+>>> s = 'abcdefghijklmn'
+>>> i = -1
+>>> for i in range(-1, -len(s), -1):
+	print s[:i]
+包含输出s的循环
+>>> for i in [None] + range(-1, -len(s), -1):
+	print s[:i]
+
+list(iter) 把可迭代对象转换为列表
+str(obj) 把obj 对象转换成字符串(对象的字符串表示法)
+unicode(obj) 把对象转换成Unicode 字符串(使用默认编码)
+basestring() 抽象工厂函数,其作用仅仅是为str 和unicode 函数提供父类，所以不能被实例化，也不能被调用(详见第6.2 节)
+tuple(iter) 把一个可迭代对象转换成一个元组对象
+
+sorted(iter,func=None,key=None,reverse=False)		排序
+sum(seq, init=0)		求一个序列的和
+
+成员操作符(in ,not in)
+成员操作符用于判断一个字符或者一个子串(中的字符)是否出现在另一个字符串中。出现
+则返回True，否则返回False.注意，成员操作符不是用来判断一个字符串是否包含另一个字符
+串的，这样的功能由find()或者index()（还有它们的兄弟：rfind()和rindex())函数来完成
+
+>>> import string
+>>> string.ascii_uppercase
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+>>> string.ascii_lowercase
+'abcdefghijklmnopqrstuvwxyz'
+>>> string.ascii_letters
+'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+>>> string.digits
+'0123456789'	
+	
+>>> '%s %s' % ('Spanish', 'Inquisition')
+'Spanish Inquisition'
+>>> s = ' '.join(('Spanish', 'Inquisition', 'Made Easy'))
+>>> s
+'Spanish Inquisition Made Easy'
+>>> # no need to import string to use string.upper():
+>>> ('%s%s' % (s[:3], s[20])).upper()
+'SPAM'	
+	
+格式化字符 转换方式
+%c 转换成字符(ASCII 码值，或者长度为一的字符串)
+%ra 优先用repr()函数进行字符串转换
+%s 优先用str()函数进行字符串转换
+%d / %i 转成有符号十进制数
+%ub 转成无符号十进制数
+%ob 转成无符号八进制数
+%xb/%Xb (Unsigned)转成无符号十六进制数(x/X 代表转换后的十六进制字符的大小写)
+%e/%E 转成科学计数法(e/E 控制输出e/E)
+%f/%F 转成浮点数(小数部分自然截断)
+%g/%G %e 和%f/%E 和%F 的简写
+%% 输出%
+* 定义宽度或者小数点精度
+- 用做左对齐
++ 在正数前面显示加号( + )
+<sp> 在正数前面显示空格
+# 在八进制数前面显示零('0')，在十六进制前面显示'0x'或者'0X'(取决于
+用的是'x'还是'X')
+0 显示的数字前面填充‘0’而不是默认的空格
+% '%%'输出一个单一的'%'
+(var) 映射变量(字典参数)
+m.n m 是显示的最小总宽度,n 是小数点后的位数(如果可用的话)
+>>> "we are at %d%%" % 100
+'we are at 100%'
+>>> "MM/DD/YY = %02d/%02d/%d" % (2, 15, 67)
+'MM/DD/YY = 02/15/67'
+
+>>> 'There are %(howmany)d %(lang)s Quotation Symbols' % \
+... {'lang': 'Python', 'howmany': 3}
+'There are 3 Python Quotation Symbols'
+
+Template 对象有两个方法,substitute()和safe_substitute().前者更为严谨,在key 缺少的情况下它会报一
+个KeyError 的异常出来，而后者在缺少key 时，直接原封不动的把字符串显示出来.
+
+>>> from string import Template
+>>> s = Template('There are ${howmany} ${lang} Quotation Symbols')
+>>> print s.substitute(lang='Python', howmany=3) There are 3 Python QuotationSymbols
+>>> print s.safe_substitute(lang='Python') There are ${howmany} Python QuotationSymbols
+
+>>> f = open(r'C:\windows\temp\readme.txt', 'r')
+>>> f.readline()
+
+>>> str2 = 'lmn'
+>>> str3 = 'xyz'
+>>> max(str2)
+'n'
+>>> min(str3)
+'x'
+
+>>> s = 'fo'
+>>> for i, t in enumerate(s):
+	print i, t
+0 f
+1 o
+>>> for i in enumerate(s):
+	print i
+(0, 'f')
+(1, 'o')
+
+>>> s, t = 'foa', 'obr'
+>>> zip(s, t)
+[('f', 'o'), ('o', 'b'), ('a', 'r')]
+
+>>> not isinstance('foo', unicode)
+True
+>>> not isinstance('foo', basestring)
+False
+
+string.capitalize() 把字符串的第一个字符大写
+string.center(width) 返回一个原字符串居中,并使用空格填充至长度width 的新字符串
+string.count(str, beg=0,end=len(string)) 返回str 在string 里面出现的次数，如果beg 或者end 指定则返回指定范围内str 出现的次数
+string.decode(encoding='UTF-8',errors='strict') 以encoding 指定的编码格式解码string，如果出错默认报一个ValueError 的异常， 除非errors 指定的是'ignore' 或者'replace'
+string.encode(encoding='UTF-8',errors='strict') 以encoding 指定的编码格式编码string，如果出错默认报一个ValueError 的异常，除非errors 指定的是'ignore'或者'replace'
+string.endswith(obj, beg=0,end=len(string)) 检查字符串是否以obj 结束，如果beg 或者end 指定则检查指定的范围内是否以obj 结束，如果是，返回True,否则返回False.
+string.expandtabs(tabsize=8)把字符串string 中的tab 符号转为空格，默认的空格数tabsize 是8.
+string.find(str, beg=0,end=len(string)) 检测str 是否包含在string 中，如果beg 和end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1
+string.index(str, beg=0,end=len(string)) 跟find()方法一样，只不过如果str 不在string 中会报一个异常.
+string.isalnum() R 如果string 至少有一个字符并且所有字符都是字母或数字则返回True,否则返回False
+string.isalpha() 如果string 至少有一个字符并且所有字符都是字母则返回True,否则返回False
+string.isdecimal() 如果string 只包含十进制数字则返回True 否则返回False.
+string.isdigit() 如果string 只包含数字则返回True 否则返回False.
+string.islower() 如果string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回True，否则返回False
+string.isnumeric() 如果string 中只包含数字字符，则返回True，否则返回False
+string.isspace() 如果string 中只包含空格，则返回True，否则返回False.
+string.istitle() 如果string 是标题化的(见title())则返回True，否则返回False
+string.isupper() 如果string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回True，否则返回False
+string.join(seq) Merges (concatenates)以string 作为分隔符，将seq 中所有的元素(的字符串表示)合并为一个新的字符串
+string.ljust(width)返回一个原字符串左对齐,并使用空格填充至长度width 的新字符串
+string.lower() 转换string 中所有大写字符为小写.
+string.lstrip() 截掉string 左边的空格
+string.partition(str) 有点像find()和split()的结合体,从str 出现的第一个位置起,把字符串string 分成一个3 元素的元组(string_pre_str,str,string_post_str),如果string 中不包含str 则string_pre_str == string.
+string.replace(str1, str2,num=string.count(str1))把string 中的str1 替换成str2,如果num 指定，则替换不超过num 次.
+string.rfind(str, beg=0,end=len(string))类似于find()函数，不过是从右边开始查找.
+string.rindex( str, beg=0,end=len(string)) 类似于index()，不过是从右边开始.
+string.rjust(width)返回一个原字符串右对齐,并使用空格填充至长度width 的新字符串
+string.rpartition(str)e 类似于partition()函数,不过是从右边开始查找.
+string.rstrip() 删除string 字符串末尾的空格.
+string.split(str="", num=string.count(str)) 以str 为分隔符切片string，如果num有指定值，则仅分隔num 个子字符串
+string.splitlines(num=string.count('\n')) 按照行分隔，返回一个包含各行作为元素的列表，如果num 指定则仅切片num 个行.
+string.startswith(obj, beg=0,end=len(string))b, e 检查字符串是否是以obj 开头，是则返回True，否则返回False。如果beg 和end 指定值，则在指定范围内检查.
+string.strip([obj]) 在string 上执行lstrip()和rstrip()
+string.swapcase() 翻转string 中的大小写
+string.title()b, c 返回"标题化"的string,就是说所有单词都是以大写开始，其余字母均为小写(见istitle())
+string.translate(str, del="") 根据str 给出的表(包含256 个字符)转换string 的字符,要过滤掉的字符放到del 参数中
+string.upper() 转换string 中的小写字母为大写
+string.zfill(width) 返回长度为width 的字符串，原字符串string 右对齐，前面填充0
+>>> quest = 'what is your favorite color?'
+>>> ':'.join(quest.split())
+'what:is:your:favorite:color?'
+
+程序中出现字符串时一定要加个前缀 u.
+不要用 str()函数，用unicode()代替.
+不要用过时的 string 模块 -- 如果传给它的是非ASCII 字符，它会把一切搞砸。
+不到必须时不要在你的程序里面编解码 Unicod 字符.只在你要写入文件或数据库或者网络时，才调用encode()函数;相应地，只在你需要把数据读回来的时候才调用decode()函数.
+
+失误 #1: 你必须在一个极有限的时间内写出一个大型的应用，而且需要其他语言的支持，
+但是产品经理并没有明确定义这一点。你并没有考虑Unicode 的兼容，直到项目快要结束... ,
+这时候再添加Unicode 的支持几乎不太可能，不是吗？
+结果 #1: 没能预测到最终用户对其他语言界面的需求，在集成他们用的面向其他语种的应
+用时又没有使用Unicode 支持.更新整个系统既让让人觉得枯燥和更是浪费时间。
+失误 #2:在源码中到处使用string 模块或者str()和chr()函数.
+结果 #2:通过全局的查找替换把str()和chr()替换成unicode()和unichr()，但是这样一
+来很可能就不能再用pickle 模块，要用只能把所有要pickle 处理的数据存成二进制形式，这
+样一来就必须修改数据库的结构，而修改数据库结构就意味着全部推倒重来.
+失误 #3: 不能确定所有的辅助系统都完全地支持Unicode.
+结果 #3: 不得不去为那些系统打补丁，而其中有些系统可能你根本就没有源码.修复对
+Unicode 支持的bug 可能会降低代码的可靠性，而且非常有可能引入新的bug.
+
+内建的unicode()函数
+Unicode 的工厂方法，同Unicode 字符串操作符(u / U)的工作方式很类似，它接受一个string 做参数，返回一个Unicode 字符串.
+内建的decode()/encode()方法
+decode()和encode()内建函数接受一个字符串做参数返回该字符串对应的解码后/编码后的字符串.decode()和encode()都可以应用于常规字符串和Unicode 字符串.decode()方法是在Python2.2 以后加入的.
+
+

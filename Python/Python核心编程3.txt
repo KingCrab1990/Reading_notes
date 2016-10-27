@@ -1,0 +1,86 @@
+string 字符串操作相关函数和工具，比如Template 类.
+re 正则表达式:强大的字符串模式匹配模块
+struct 字符串和二进制之间的转换
+c/StringIO 字符串缓冲对象，操作方法类似于file 对象.
+base64 Base 16,32,64 数据编解码
+codecs 解码器注册和基类
+crypt 进行单方面加密
+difflib 找出序列间的不同
+hashlib 多种不同安全哈希算法和信息摘要算法的API
+hma HMAC 信息鉴权算法的Python 实现
+md5 RSA 的MD5 信息摘要鉴权
+rotor 提供多平台的加解密服务
+sha NIAT 的安全哈希算法SHA
+stringprep 提供用于IP 协议的Unicode 字符串
+textwrap 文本打包和填充
+unicodedata Unicode 数据库
+
+RE
+该模块中包含的关键函数有:
+compile() - 将一个RE 表达式编译成一个可重用的RE 对象;
+match() - 试图从字符串的开始匹配一个模式;
+search() - 找出字符串中所有匹配的项;
+sub() - 进行查找替换操作。其中的一些函数返回匹配到的对象，你可以通过组匹配来访问（如果找到的话）。
+
+del list[id]
+remove listItem
+
+sorted(ll)
+sorted(ll, reverse = True)
+>>> for t in reversed(s):
+... 	print t,
+
+>>> a = [6., 4., 5.]
+>>> sum(a)
+15.0
+
+list.append(obj) 向列表中添加一个对象obj
+list.count(obj) 返回一个对象obj 在列表中出现的次数
+list.extend(seq) 把序列seq 的内容添加到列表中
+list.index(obj, i=0,j=len(list)) 返回list[k] == obj 的k 值,并且k 的范围在 i<=k<j;否则引发ValueError 异常.
+list.insert(index, obj) 在索引量为index 的位置插入对象obj.
+list.pop(index=-1) 删除并返回指定位置的对象,默认是最后一个对象
+list.remove(obj) 从列表中删除对象obj
+list.reverse() 原地翻转列表
+list.sort(func=None,key=None,reverse=False) 以指定的方式排序列表中的成员,如果func 和key 参数指定,则按照指定的方式比较各个元素,如果reverse 标志被置为True,则列表以反序排列.
+
+operator 包含函数调用形式的序列操作符，比如operator.concat(m,n)就相当于连接操作(m+n)。
+collections 高性能容器数据类型
+
+对一个对象进行浅拷贝其实是新创建了一个类型跟原对
+象一样,其内容是原来对象元素的引用,换句话说,这个拷贝的对象本身是新的,但是它的内容不
+是.序列类型对象的浅拷贝是默认类型拷贝,并可以以下几种方式实施:(1)完全切片操作[:],(2)
+利用工厂函数,比如list(),dict()等,(3)使用copy 模块的copy 函数.
+
+要得到一个完全拷贝或者说深拷贝--创建一个新的容器对象,
+包含原有对象元素（引用）全新拷贝的引用--需要copy.deepcopy()函数
+wifey = copy.deepcopy(person)
+
+platform模块获取当前操作系统信息(platform.platform)
+
+list <==>  tuple ==> dict
+
+>>> dict2 = {'name': 'earth', 'port': 80}
+>>>
+>>>> for key in dict2:
+... print 'key=%s, value=%s' % (key, dict2[key])
+
+字典
+逐一地添加每个键-值对
+增加和修改
+>>> dict3 = {}
+>>> dict3[1] = 'abc'
+>>> dict3['1'] = 3.14159
+>>> dict3[3.2] = 'xyz'
+>>> dict3
+{3.2: 'xyz', 1: 'abc', '1': 3.14159}
+数字和字符串可以作为字典中的键， 但是列表和其他字典不行
+>>> dict2['name'] = 'venus' # 更新已有条目
+>>> dict2['port'] = 6969 # 更新已有条目
+print 'host %(name)s is running on port %(port)d' %dict2
+删除
+del dict2['name'] # 删除键为“name”的条目
+dict2.clear() # 删除dict2 中所有的条目
+del dict2 # 删除整个dict2 字典
+dict2.pop('name') # 删除并返回键为“name”的条目
+

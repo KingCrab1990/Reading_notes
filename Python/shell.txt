@@ -1,0 +1,82 @@
+shell命令
+$?上一个命令是否成功，非0有错误，0为成功
+if [ $? -eq 0 ]
+sh special.var file01 file02 file03
+$# is: 3
+$* is: file01 file02 file03
+$? is: 0
+$$ is: pid
+$0 is：special.var
+$2 is：file02
+
+-eq 相等
+-ge >=
+-gt >
+-le <=
+-lt <
+-ne !=
+
+-n str  字符串是否不为空
+-z str  字符串是否为空
+
+-d file  是否目录
+-f file  是否常规文件
+-x file  是否可执行
+-r file  是否可读
+-w file  是否可写
+-a file  是否存在
+-s file  是否非零
+
+if xxx then
+  ...
+elif xxx then
+  ...
+else
+  ...
+fi
+
+test -d $1 等价于  [-d $1]
+
+exit 0  正常退出
+exit 非零  非正常退出
+
+for xxx
+do
+  xxx
+done
+
+read  变量名  #获取用户输入
+
+echo -e "1\t2\t3"  -e 使用转义序列
+
+echo -e "\e[1;32m xxx \e[0m"  改变xxx的颜色
+
+pgrep xxx  获得xxx进程的进程id
+cat /proc/pid/environ
+
+xxx = xxxxxxx
+export xxx	设置环境变量
+
+var=12312341234
+${#var}		获取字符串包含字符数
+
+$UID为0，则为root用户
+
+使用let时，变量名前不需要再加$  类似{()} [] expr
+
+>		写入
+>>		追加
+
+
+
+
+
+
+
+
+
+
+
+
+
+

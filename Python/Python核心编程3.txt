@@ -84,3 +84,121 @@ dict2.clear() # 删除dict2 中所有的条目
 del dict2 # 删除整个dict2 字典
 dict2.pop('name') # 删除并返回键为“name”的条目
 
+
+
+
+
+
+
+260页
+
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
+
+本书网址以及书籍概要
+http://python.org/dev/peps.
+
+www.Python.org/doc/essays/styleguide.html
+www.Python.org/dev/peps/pep-0007/
+www.Python.org/dev/peps/pep-0008/
+www.Python.org/dev/peps/pep-0020/
+www.Python.org/dev/peps/pep-0257/
+
+对高级的数字科学计算应用来说，你会对著名的第三方包 Numeric(NumPy) 和SciPy 感兴
+趣。关于这两个包的详细请访问下面的网址。
+http://numeric.scipy.org/
+http://scipy.org/
+
+
+数据科学：pandas
+web框架：Django		Flask	Tornado
+数据存储：MongoDB		Celery		RabbitMQ
+反爬虫技术：Selenium		Phantomjs		
+分布式爬虫
+
+
+
+Python科学计算
+Python Web开发学习实录
+Python编程入门经典
+Python项目开发实战
+Python程序设计基础
+
+JavaScript与jQuery实战教程
+JavaScript & jQuery交互式Web前端开发
+网页设计与开发 : HTML、CSS、JavaScript
+图灵程序设计丛书：数据结构与算法JavaScript描述
+JavaScript入门经典: 第5版
+JavaScript从入门到精通
+
+Node.js高级编程
+
+统计自然语言处理
+数据挖掘与机器学习: WEKA应用技术与实践
+机器学习
+视觉机器学习20讲
+
+Django Web开发指南.pdf
+diveintopythonzh-cn.pdf
+Head First Ajax.pdf
+Head First HTML.pdf
+Head First HTML5 Programming.pdf
+Head First HTMLpdf.pdf
+Head First Java.pdf
+head first javascript.pdf
+Head First Networking.pdf
+Head First SQL_深入浅出SQL中文版.pdf
+Head First 统计.pdf
+Packt.Mastering.Python.for.Finance.1784394513.pdf
+Python基础教程(第2版 修订版).pdf
+Python学习手册(第4版).pdf
+python开发实战.pdf
+Python核心编程第二版.pdf
+Python网络数据采集.pdf
+【试读】Python编程：从入门到实践.pdf
+笨办法学Python.pdf
+算法导论2中文版.pdf
+算法谜题.pdf
+计算机程序的构造和解释.pdf
+鸟哥的Linux私房菜 基础学习篇(第三版).pdf
+算法竞赛入门.pdf
+LINUX SHELL脚本攻略(中文版带书签).pdf
+
+for each in os.listdir(r"D:\工作相关\16.8.26工作文件\python资料"):
+	print each
+
+for each in os.listdir(r"D:\."):
+	print each
+
+遍历目录下的文件名称
+for root, dirs, files in os.walk('D:' + os.sep + '收藏夹'):
+    print '--------------directory < ' + root + ' > -----------------'
+
+    for d in dirs:
+		print d
+    for f in files:
+		print f
+		
+		
+for item in enumerate(l):
+	print item
+l为list，item为类似(0, l[0]),(1, l[1])....的元组
+
+
+ip正则：((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))
+((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)
+(((25[0-5])|(2[0-4]\d)|(1\d{2})|([1-9]?\d))\.){3}((25[0-5])|(2[0-4]\d)|(1\d{2})|([1-9]?\d))
+
+使用linux命令
+#!/usr/bin/env python
+#python wapper for the ls command
+import subprocess
+subprocess.call(["ls","-l"])
+
+斐波那契数列
+a, b = 0, 1
+>>> while b<100:
+	print (b),
+	a, b = b, a+b

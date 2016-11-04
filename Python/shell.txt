@@ -69,8 +69,7 @@ $UID为0，则为root用户
 
 
 
-
-
+在shell中使用Esc下面的丶键，构造成name=`python mainFuncMod.py`的样式，可以获取到mainFuncMod.py的执行结果，在py中使用print输出
 
 
 

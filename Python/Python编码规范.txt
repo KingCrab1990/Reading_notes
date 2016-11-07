@@ -1,1 +1,67 @@
 参数化查询是防止SQL注入最便捷有效的一种方式，如果使用支持参数化查询功能的数据库操作接口就能便捷有效地防止SQL注入攻击。DB-API是一个规范，它定义了一系列必须的对象和数据库存取方式，以便为各种各样的底层数据库系统和多种多样的数据库接口程序提供一致的访问接口。Python的DB-API规范目的在于鼓励促进所有用于访问数据库的Python模块相互之间的一致性。目前Python支持几乎所有的平台，它支持大量主要的数据库访问，当中有很多都是基于DB-API规范定义的，其中的execute()函数可以支持参数传入，从而从库函数的层面上解决了SQL注入的问题。比如操作PostgreSQL的psycopg2，操作SQLite的sqlite3，操作Sybase的Sybase module for Python，处理ODBC连接的pyodbc，处理JDBC连接的zxJDBC库等，都是支持DB-API2.0的Python库。详情可以查询Python DB-API的官方介绍：https://www.python.org/dev/peps/pep-0249/#id41，对应的中文翻译的介绍可以参照：http://blog.csdn.net/dajianshi/article/details/7482201
+
+
+避免sql注入：
+def gen_sql_str(name_str):
+    name_str=name_str.replace("'","''")
+    sql_str = "select * from stu where name ='%s'" % name_str
+    print sql_str
+
+
+args = (id, type)
+cur.execute('select id, type ,name from xl_bugs where id = %s and type = %s', args )
+
+
+try:
+    print os.path.realpath("pwck")
+except Exception, ex:
+    print ex
+
+
+from random import randint
+num = randint(1,100)
+print "Guess the number! 1 to 100."
+while True:
+    guess = raw_input ('Your guess> ')
+    if guess != str(num):
+        print "Nope,", guess, "is wrong."
+    else:
+        print "You win!"
+        exit(0)
+
+
+
+if 2 != len(sys.argv):
+    print ("Invalid file")
+else:
+    if 0 == sys.argv[1].find("/home/python/"):
+        try:
+            open(sys.argv[1])
+        except IOError:
+            print ("Invalid file")
+    else:
+        print ("Invalid file")
+
+
+大多数具有副作用的函数：
+	文件处理 (open, tarfile, zipfile, ...)
+	网络调用(urllib2, socket, ...)
+	数据serialization/persistence (pickle, shelve, ...)
+	进程/线程管理 (subprocess, os.fork, os.kill, ...)
+内置函数：
+	getattr
+	setattr
+	delattr
+	eval
+	exec
+	execfile
+	__import__
+这些函数都是能够被利用的危险函数，应慎重或者禁止使用这些函数。
+
+
+
+	盐值至少应该包含8字节而且必须是由安全随机数产生。
+	应使用强哈希函数，推荐使用SHA-256或者更加安全的哈希函数。
+	推荐默认进行50000次哈希，至少对有性能限制（比如说嵌套系统）的产品进行5000次以上哈希
+
+如果你需要一个真正的密码安全随机数，你需要使用os.urandom()或者random模块中的SystemRandom类来实现
